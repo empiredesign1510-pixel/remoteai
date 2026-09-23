@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="Remote universal untuk TV, AC, CCTV, dan perangkat elektronik lain." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Orbit Remote</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">UNIVERSAL REMOTE</p>
+        <h1>Orbit</h1>
+      </div>
+      <button id="addDeviceBtn" class="icon-btn" aria-label="Tambah perangkat">＋</button>
+    </header>
+
+    <section class="status-strip" aria-label="Status koneksi">
+      <span class="dot" id="bridgeDot"></span>
+      <div>
+        <strong id="bridgeStatus">Mode browser</strong>
+        <p id="bridgeHint">Perintah IR akan disimulasikan.</p>
+      </div>
+    </section>
+
+    <nav id="roomChips" class="chips" aria-label="Pilih ruangan"></nav>
+
+    <main>
+      <section>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PERANGKAT</p>
+            <h2>Pilih remote</h2>
+          </div>
+          <span id="deviceCount" class="count-pill">0</span>
+        </div>
+        <div id="deviceGrid" class="device-grid"></div>
+      </section>
+
+      <section class="remote-card" id="remotePanel" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="deviceDialog" class="modal">
+    <form method="dialog" id="deviceForm" class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">PERANGKAT BARU</p>
+          <h2>Tambah remote</h2>
+        </div>
+        <button value="cancel" class="icon-btn ghost" aria-label="Tutup">×</button>
+      </div>
+
+      <label>Nama perangkat
+        <input name="name" placeholder="Contoh: TV Samsung" required maxlength="32" />
+      </label>
+      <label>Ruangan
+        <input name="room" placeholder="Contoh: Ruang Tamu" required maxlength="24" />
+      </label>
+      <label>Tipe
+        <select name="type" required>
+          <option value="tv">TV / Set-top box</option>
+          <option value="ac">AC</option>
+          <option value="cctv">CCTV / IP Camera</option>
+          <option value="custom">Custom IR</option>
+        </select>
+      </label>
+      <label>Brand / profil
+        <input name="brand" placeholder="Samsung, LG, Daikin, dll." maxlength="32" />
+      </label>
+      <label class="advanced">IR frequency (Hz)
+        <input name="frequency" type="number" value="38000" min="20000" max="60000" />
+      </label>
+
+      <button class="primary-btn" value="default" type="submit">Tambahkan</button>
+      <p class="form-note">Profil bawaan memakai kode demo. Masukkan pola IR asli di <b>app.js</b> atau hubungkan database IR milikmu.</p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
